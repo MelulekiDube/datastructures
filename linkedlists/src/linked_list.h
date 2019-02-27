@@ -10,6 +10,8 @@ typedef struct Node{
 	node_ptr next;
 }Node;
 
+
+
 void insert(int data);
 void insert_node_tail(int data);
 void insert_node_head(int data);

@@ -25,6 +25,9 @@ void test(){
 	test_del(9);
 	printf("Inserting to 0\n");insert_node_k(9, 9);
 	test_print_list();
+	printf("Testing reverse\n");
+	reverse();
+	test_print_list();
 }
 
 int main(int argc, char *args[]){
@@ -33,4 +36,5 @@ int main(int argc, char *args[]){
 	}
 	test_print_list();
 	test();
+	return EXIT_SUCCESS;
 }

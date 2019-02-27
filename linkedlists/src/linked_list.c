@@ -107,6 +107,35 @@ void del_node(int d){
 	}
 }
 
+void _reverse(node_ptr k, node_ptr prev){
+	if(!k->next){
+		head = k;
+		k->next = prev;
+		return;
+	}
+	_reverse(k->next, k);
+	k->next = prev;
+}
+
+void _reverse2(){
+	node_ptr curr = head, prev=NULL, next = curr->next;
+	while(curr){
+		curr->next = prev;
+		prev = curr;
+		curr = next;
+		if(next)next = next->next;
+	}
+	head = prev;
+}
+
+void reverse(){
+	if(head)
+		_reverse2();
+		//_reverse(head, (node_ptr) NULL);
+	else
+		printf("Cannot reverse an empty list\n");
+}
+
 /*
 *method to print the list
 */

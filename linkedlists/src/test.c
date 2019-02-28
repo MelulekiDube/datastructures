@@ -28,6 +28,8 @@ void test(){
 	printf("Testing reverse\n");
 	reverse();
 	test_print_list();
+	sort();
+	test_print_list();
 }
 
 int main(int argc, char *args[]){

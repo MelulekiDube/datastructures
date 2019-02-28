@@ -19,7 +19,10 @@ void insert_node_k(int k, int data);
 void insert_node_k_fromlast(int k, int data);
 void del_node(int data);
 
+
+void sort();
 void reverse();
+void clear();
 int list_size();
 void print_list();
 #endif

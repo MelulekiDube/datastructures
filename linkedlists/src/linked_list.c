@@ -107,6 +107,9 @@ void del_node(int d){
 	}
 }
 
+/**
+*this is to perfom recursive reversing of list
+*/
 void _reverse(node_ptr k, node_ptr prev){
 	if(!k->next){
 		head = k;
@@ -117,6 +120,9 @@ void _reverse(node_ptr k, node_ptr prev){
 	k->next = prev;
 }
 
+/*
+* this is a second reverse function that does not use extra stack or memory
+**/
 void _reverse2(){
 	node_ptr curr = head, prev=NULL, next = curr->next;
 	while(curr){
@@ -149,3 +155,44 @@ void print_list(){
 			printf("\n");
 	}
 }
+
+/*
+*
+*/
+void swap(node_ptr org, node_ptr p){
+	int temp = org->data;
+	org->data = p->data;
+	p->data = temp;
+}
+
+/*
+* this sorts the linked list
+*/
+void sort(){
+	node_ptr n = head;
+	while(n){
+		node_ptr min = n, it = n->next;
+		while(it){
+			if(it->data<min->data)
+				min = it;
+			it = it->next;
+		}
+		swap(n, min);
+			n = n->next;
+	}
+}
+
+
+/*
+* Clears the linked_list
+*/
+void clear(){
+	while(head){
+		node_ptr temp = head->next;
+		free(temp);
+		head = temp;
+	}
+	head = NULL;
+}
+
+

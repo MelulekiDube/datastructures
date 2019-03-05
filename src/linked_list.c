@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "linked_list.h"
+#include "../include/linked_list.h"
 
 node_ptr head = NULL;
 /**
@@ -195,4 +195,6 @@ void clear(){
 	head = NULL;
 }
 
-
+node_ptr get_head(void){
+	return head;
+}

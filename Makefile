@@ -4,21 +4,42 @@
 
 CC := gcc 
 # CC := clang --analyze # and comment out the linker last line for sanity
-LLDIR := linkedlists
-SPIKESDIR := spikes
-ll:
-	make -C $(LLDIR)
+SRCDIR := src
+BUILDDIR := build
+BINDIR := bin
+TARGET := bin/runner
+TTARGET := bin/tester
+WFIND := C:\cygwin64\bin\find
 
-spike:
-	make -C $(SPIKESDIR)
-	
-runsp:
-	make run -C $(SPIKESDIR)
-	
-runll:
-	make run -C $(LLDIR)
+SRCEXT := c
+SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
+
+OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
+CFLAGS := -g -Wall
+LIB := -lcunit
+INC := -I include
+$(TARGET): $(OBJECTS)
+	@echo " Linking...";
+	@mkdir -p $(BINDIR)
+	$(CC) $^ -o $(TARGET)
+
+$(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT) clean
+	@mkdir -p $(BUILDDIR);
+	@echo "compiling the source files"
+	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
+
+run:
+	./$(TARGET)
+
+tester:
+	@mkdir -p $(BINDIR)
+	$(CC) $(CFLAGS) test/test.c $(SOURCES) $(INC) $(LIB) -o $(TTARGET)
+
+testrunner:
+	./$(TTARGET)
+
 clean:
-	make clean -C $(LLDIR)
-	make clean -C $(SPIKESDIR)
+	@echo " Cleaning..."; 
+	$(RM) -r $(BUILDDIR) $(TARGET) $(BINDIR) $(TTARGET)
 
 .PHONY: clean

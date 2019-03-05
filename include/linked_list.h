@@ -18,11 +18,11 @@ void insert_node_head(int data);
 void insert_node_k(int k, int data);
 void insert_node_k_fromlast(int k, int data);
 void del_node(int data);
+node_ptr get_head(void);
 
-
-void sort();
-void reverse();
-void clear();
-int list_size();
-void print_list();
+void sort(void);
+void reverse(void);
+void clear(void);
+int list_size(node_ptr node);
+void print_list(void);
 #endif

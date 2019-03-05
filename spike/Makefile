@@ -5,8 +5,10 @@
 CC := gcc 
 # CC := clang --analyze # and comment out the linker last line for sanity
 SRCDIR := src
+TESTDIR := test
 BUILDDIR := build
 BINDIR := bin
+TESTRUNNER := bin/test_runner
 TARGET := bin/runner
 WFIND := C:\cygwin64\bin\find
 
@@ -17,16 +19,16 @@ else
 	SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 endif
 
-OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
+OBJECTS := $(patsubst ,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 CFLAGS := -g -Wall
 #LIB := 
 INC := -I include
-$(TARGET): $(OBJECTS)
+$(TESTRUNNER): $(OBJECTS)
 	@echo " Linking...";
 	@mkdir -p $(BINDIR)
 	$(CC) $^ -o $(TARGET)
 
-$(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT) clean
+$(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT) $(TESTDIR)/%.$(SRCEXT) clean
 	@mkdir -p $(BUILDDIR);
 	@echo "compiling the source files"
 	$(CC) $(CFLAGS) $(INC) -c -o $@ $<

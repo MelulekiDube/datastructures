@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include <stdio.h>
 #include "../include/linked_list.h"
 
@@ -53,7 +52,6 @@ int list_size(node_ptr n){
 * This inserts at node k from the start
 */
 void insert_node_k(int k, int d){
-	//printf("insert_node_k %i %i", k, d);
 	if(k<=0){
 		insert_node_head(d);
 		return;
@@ -187,7 +185,8 @@ void sort(){
 * Clears the linked_list
 */
 void clear(){
-	while(head){
+	while(
+head){
 		node_ptr temp = head->next;
 		free(temp);
 		head = temp;
@@ -197,4 +196,16 @@ void clear(){
 
 node_ptr get_head(void){
 	return head;
+}
+
+bool is_empty(){
+	return (!get_head());
+}
+
+void delete_head(void){
+	if(!is_empty()){
+		node_ptr temp = head;
+		head = head->next;
+		free(temp);
+	}
 }

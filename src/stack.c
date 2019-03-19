@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include "../include/error_handling.h"
 #include "../include/stack.h"
-
+#include <stdio.h>
 
 /*
 *	This is the stack operation that adds the data item into the top of the stack as the stack is  LIFO
 */
-void push(int data){
-	insert_node_head(data);
+void push(stack s, DATA data){
+	prepend(s->list, data);
 }
 
 /*
@@ -15,11 +15,11 @@ void push(int data){
 *	If no error it will delete the current head and return the value it head.
 *
 */
-int pop(){
-	if(is_empty())
-		return report_empty_error();
-	int data = get_head()->data;
-	delete_head();
+DATA pop(stack s){
+	if(is_empty(s->list))
+		printf("error");
+	DATA data = s->list->head->data;
+	delete_head(s->list);
 	return data;
 	
 }
@@ -32,10 +32,10 @@ int pop(){
 *	associated with accessing a bad memory address. Utilises the report_empty_error method for this.
 *
 */
-int peek(){
-	if(is_empty())
-		return report_empty_error();
-	return get_head()->data;
+DATA speek(stack s){
+	if(is_empty(s->list))
+		printf("error");
+	return s->list->head->data;
 }
 
 

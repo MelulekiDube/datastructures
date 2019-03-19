@@ -18,10 +18,8 @@ OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 CFLAGS := -g -Wall
 LIB := -lcunit
 INC := -I include
-$(TARGET): $(OBJECTS)
-	@echo " Linking...";
-	@mkdir -p $(BINDIR)
-	$(CC) $^ -o $(TARGET)
+
+compile: $(OBJECTS)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT) clean
 	@mkdir -p $(BUILDDIR);

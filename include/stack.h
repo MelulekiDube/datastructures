@@ -4,10 +4,17 @@
 //INCLUDES
 #include <stdlib.h>
 #include <stdbool.h> 
-#include "../include/linked_list.h"
+#include "linked_list.h"
+#include "base.h"
 
-int peek();
-int pop();
-void push(int data);
+typedef struct _stack*  stack;
+
+struct _stack{
+	linked_list list;
+}_stack;
+
+DATA speek(stack s);
+DATA pop(stack s);
+void push(stack s, DATA data);
 #endif
 

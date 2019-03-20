@@ -26,9 +26,14 @@ typedef int (*DATA_COMPARE)(DATA, DATA);
 
 
 /*
-	@brief User defined function that will perform a particular action on the that object passed to it.
+	@brief User defined function that will print the data object
 	@param Data item to print
 */
 
 typedef void (*DATA_ACTION)(DATA);
+
+
+#define int_val(value) ((DATA){.data_int=value})
+#define dbl_val(value) ((DATA){.data_dbl=value})
+#define ptr_val(value) ((DATA){.data_ptr = value})
 #endif

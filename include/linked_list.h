@@ -63,7 +63,7 @@ node_ptr node_ptr_creator();
 	@param list is the list to append to.
 	@param data, is the data that we are appending to the newly created linked list.
 */
-void insert(linked_list list, DATA data);
+void insert_ll(linked_list list, DATA data);
 
 /*
 	@brief This methods appends that is adds a new Node to the end of the list.
@@ -143,7 +143,7 @@ void clear(linked_list list);
 int is_empty(linked_list list);
 
 /*
-	@brief This is a function that will clear and delete the linked list instance from the heap. That after this, the linked list node that was passed to this function will be null
+	@brief This is a function that will clear and delete the linked list instance from the heap.
 */
 void delete_list(linked_list list);
 #endif

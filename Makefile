@@ -31,7 +31,7 @@ run:
 
 tester:
 	@mkdir -p $(BINDIR)
-	$(CC) $(CFLAGS) test/test.c $(SOURCES) $(INC) $(LIB) -o $(TTARGET)
+	$(CC) $(CFLAGS) test/*.c $(SOURCES) $(INC) $(LIB) -o $(TTARGET)
 
 testrunner:
 	./$(TTARGET)

@@ -19,7 +19,7 @@ node_ptr node_ptr_creator(){
 	return (node_ptr)malloc(sizeof(Node));
 }
 
-void insert(linked_list list, DATA d){
+void insert_ll(linked_list list, DATA d){
 	append(list, d);
 }
 
@@ -249,10 +249,9 @@ int is_empty(linked_list list){
 }
 
 /*
-	@brief This is a function that will clear and delete the linked list instance from the heap. That after this, the linked list node that was passed to this function will be null
+	@brief This is a function that will clear and delete the linked list instance from the heap.
 */
 void delete_list(linked_list list){
 	clear(list);
 	free(list);
-	list = NULL;
 }

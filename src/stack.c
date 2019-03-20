@@ -3,6 +3,16 @@
 #include "../include/stack.h"
 #include <stdio.h>
 
+
+/**creat_stack
+* 	Initialized the stack by initializing the list that the stack is built on.
+*/
+stack creat_stack(void){
+	stack temp = (stack) malloc (sizeof(_stack));
+	temp->list = create_ll();
+	return temp;
+}
+
 /*
 *	This is the stack operation that adds the data item into the top of the stack as the stack is  LIFO
 */
@@ -38,5 +48,11 @@ DATA speek(stack s){
 	return s->list->head->data;
 }
 
-
+/**is_qempty:
+*	@brief Method to check if the stack is empty
+*	@param s The stack we want to check for emptiness
+*/
+int is_sempty(stack s){
+	return is_empty(s->list);
+}
 

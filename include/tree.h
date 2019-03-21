@@ -65,12 +65,12 @@ void insert_bst(bs_tree tree, DATA data, DATA_COMPARE comp);
 */
 bst_node_ptr find(bs_tree tree, DATA target, DATA_COMPARE comp);
 
-/** delete_bst
+/** delete_node
 *	@brief Delete a node that has a data value target
 *	@param tree: the tree we are deleting the node from.
 *	@param target: The data we are looking to delete from the tree
 */
-void delete_bst(bs_tree tree, DATA target, DATA_COMPARE comp);
+void delete_node(bs_tree tree, DATA target, DATA_COMPARE comp);
 
 /**bst_height:
 *	@brief This methods calculates the height of the tree.

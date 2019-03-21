@@ -2,12 +2,12 @@
 #include "../include/tree.h"
 
 /****************************************************************************************
-								forward declaration of private methods
+					forward declaration of private methods
 ****************************************************************************************/
 void _insert_bst(bst_node_ptr r, DATA data, DATA_COMPARE comp);
 bst_node_ptr _find(bst_node_ptr r, DATA target, DATA_COMPARE comp);
 /****************************************************************************************
-								Definitions of the methods.
+					Definitions of the methods.
 ****************************************************************************************/
 
 /*
@@ -148,6 +148,57 @@ int bst_height(bs_tree tree){
 	return _bst_height(tree->root);
 }
 
+bst_node_ptr find_min(bst_node_ptr r){
+	while(r&&r->left){
+		r= r->left;
+	}
+	return r;
+}
+
+bst_node_ptr _delete_node(bst_node_ptr r, DATA target, DATA_COMPARE comp){
+	if(!r)
+		return r;
+	int val = comp(target, r->data);
+	if(val<0){
+		r->left = _delete_node(r->left, target, comp);
+		return r;
+	}
+	if(val>0){
+		r->right = _delete_node(r->right, target, comp);
+		return r;
+	}
+	//threee cases 1: node is leaf node, 2: has left or right 3 has both children
+	//case1 leaf node
+	if(!r->left &&!r->right){
+		free(r);
+		return NULL;
+	}
+	//case 2: node has left child only
+	if(r->left&&!r->right){
+		bst_node_ptr temp = r->left;
+		free(r);
+		return temp;
+	}
+	//case 2 second half
+	if(r->right && !r->left){
+		bst_node_ptr temp = r->right;
+		free(r);
+		return temp;
+	}
+	//case 3 node has 2 children
+	bst_node_ptr min = find_min(r->right);
+	min->left = r->left;
+	free(r);
+	return min;
+}
+/** delete_node
+*	@brief Delete a node that has a data value target
+*	@param tree: the tree we are deleting the node from.
+*	@param target: The data we are looking to delete from the tree
+*/
+void delete_node(bs_tree tree, DATA target, DATA_COMPARE comp){
+	tree->root = _delete_node(tree->root, target, comp);
+}
 /***********************************************************************************************
 								Tree traversals
 ***********************************************************************************************/

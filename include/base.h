@@ -32,8 +32,12 @@ typedef int (*DATA_COMPARE)(DATA, DATA);
 
 typedef void (*DATA_ACTION)(DATA);
 
-
 #define int_val(value) ((DATA){.data_int=value})
 #define dbl_val(value) ((DATA){.data_dbl=value})
 #define ptr_val(value) ((DATA){.data_ptr = value})
+
+typedef struct pair{
+	DATA key;
+	DATA val;
+}pair;
 #endif

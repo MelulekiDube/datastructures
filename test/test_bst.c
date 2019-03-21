@@ -8,7 +8,26 @@ void test_bstcreate();
 void insert_bsttest();
 void find_bst_test();
 void test_bst_height();
+void test_delete();
 void print_traversals();
+
+char* args[] ={
+	"Tree creation test",
+	"Tree insert function test",
+	"Tree find function test",
+	"Tree get height function test",
+	"Tree Deletion function",
+	"Tree traversal functions"
+};
+
+void (*bst_test[])() = {
+	&test_bstcreate,
+	&insert_bsttest,
+	&find_bst_test,
+	&test_bst_height,
+	&test_delete,
+	&print_traversals
+};
 extern int compare(DATA d1, DATA d2);
 int vals [] = {13, 3, 4, 12, 14, 10, 5, 1, 8, 2, 7, 9, 11, 6, 18};
 
@@ -27,25 +46,11 @@ int test_bst(void){
 	  CU_cleanup_registry();
 	  return CU_get_error();
 	}
-	if (!CU_add_test(basic_operations_suit, "Tree creation test", test_bstcreate)) {
-	  CU_cleanup_registry();
-	  return CU_get_error();
-	}
-	if (!CU_add_test(basic_operations_suit, "Tree insert function test", insert_bsttest)) {
-	  CU_cleanup_registry();
-	  return CU_get_error();
-	}
-	if (!CU_add_test(basic_operations_suit, "Tree find function test", find_bst_test)) {
-	  CU_cleanup_registry();
-	  return CU_get_error();
-	}
-	if (!CU_add_test(basic_operations_suit, "Tree get height function test", test_bst_height)) {
-	  CU_cleanup_registry();
-	  return CU_get_error();
-	}
-	if (!CU_add_test(basic_operations_suit, "Tree traversal functions", print_traversals)) {
-	  CU_cleanup_registry();
-	  return CU_get_error();
+	for(int i=0; i<6;++i){
+		if (!CU_add_test(basic_operations_suit, args[i], *bst_test[i])) {
+		  CU_cleanup_registry();
+		  return CU_get_error();
+		}
 	}
 	 // Run the tests and show the run summary
    CU_basic_run_tests();
@@ -112,4 +117,21 @@ void print_traversals(){
 	post_order(tree, &print_data);
 	printf("\nLevelOrder traversal:\n");
 	level_order(tree, &print_data);
+}
+
+void test_delete(){
+	bs_tree tree = create_bst();
+	test_insert(tree);
+	delete_node(tree, int_val(7), &compare);
+	CU_ASSERT_EQUAL(bst_height(tree), 8);
+	printf("\n\nAfter deleting 7 from the tree is as below\nLevelOrder traversal:\n");
+	level_order(tree, &print_data);
+	delete_node(tree, int_val(1), &compare);
+	printf("\n\nAfter deleting 1 from the tree is as below\nLevelOrder traversal:\n\n");
+	level_order(tree, &print_data);
+	delete_node(tree, int_val(13), &compare);
+	printf("\n\nAfter deleting the 13 from the tree is as below\nLevelOrder traversal:\n\n");
+	level_order(tree, &print_data);
+	delete_tree(tree);
+	printf("\n\n\n");
 }

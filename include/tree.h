@@ -78,6 +78,12 @@ void delete_node(bs_tree tree, DATA target, DATA_COMPARE comp);
 */
 int bst_height(bs_tree tree);
 
+/**top_view
+*	@brief This method will print the top view of a given tree. That is the nodes we can see from looking at the tree from above.
+*	@param tree: the tree we want to print the top view for
+*/
+void top_view(bs_tree tree, DATA_ACTION act);
+
 /**********************************************************************************
 						Tree traversal functions
 **********************************************************************************/

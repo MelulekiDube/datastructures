@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "../include/tree.h"
-
+#include <limits.h>
 /****************************************************************************************
 					forward declaration of private methods
 ****************************************************************************************/
@@ -265,4 +265,47 @@ void level_order(bs_tree tree, DATA_ACTION act){
 		}
 	}
 	_level_order(tree->root);
+}
+
+void get_end_points(bst_node_ptr r, int d, int *min, int *max){
+	if(r){
+		if(d<*min)
+			*min = d;
+		if(d>*max)
+			*max = d;
+		get_end_points(r->left, d-1, min, max);
+		get_end_points(r->right, d+1, min, max);
+	}
+}
+
+void get_top_view(bst_node_ptr r, int d, int h, pair *p, int b){
+	if(r){
+		pair item = p[d+b];
+		if(!item.val.data_ptr || h<item.key.data_int){
+			p[d+b]=(pair){int_val(h), ptr_val(r)};
+		}
+		get_top_view(r->left, d-1, h+1, p, b);
+		get_top_view(r->right, d+1, h+1, p, b);
+	}
+}
+
+/**top_view
+*	@brief This method will print the top view of a given tree. That is the nodes we can see from looking at the tree from above.
+*	@param tree: the tree we want to print the top view for
+*/
+void top_view(bs_tree tree, DATA_ACTION act){
+	int min=INT_MAX, max=INT_MIN;
+	get_end_points(tree->root, 0, &min, &max );//get the end points for the tree
+	int size = (max - min)+1;
+	printf("\n\n size is: %d\n\n", size);
+	pair combo[size];
+	int base = 0-min;
+	for(int i=0; i<size;++i){
+		combo[i] = (pair){int_val(0), ptr_val(NULL)};
+	}
+	get_top_view(tree->root, 0, 0 ,combo, base);
+	for(int i=0; i<size; ++i){
+		bst_node_ptr temp = (bst_node_ptr)(combo[i].val.data_ptr);
+		act(temp->data);
+	}
 }

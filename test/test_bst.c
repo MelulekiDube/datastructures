@@ -117,6 +117,8 @@ void print_traversals(){
 	post_order(tree, &print_data);
 	printf("\nLevelOrder traversal:\n");
 	level_order(tree, &print_data);
+	printf("\nTop view:\n\n");
+	top_view(tree, &print_data);
 }
 
 void test_delete(){

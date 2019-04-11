@@ -59,4 +59,18 @@ void quick_sort(DATA *arr, int low, int hi, DATA_COMPARE cmp);
 	@param d2: pointer to the second data item we are swapping
 */
 void swap_data(DATA* d1, DATA* d2);
+
+/*
+------------------------------------------------
+	searching algorithm
+------------------------------------------------
+*/
+/**
+	@brief Method to perform binary search in a sorted array arr
+	@param arr: The array that we are searching through
+	@param item: The item that we are looking for.
+	@param size: The size of the array
+	@param comp: The comparator for this DATA ITEM
+*/
+int binary_search(DATA *arr, int size, DATA item, DATA_COMPARE comp);
 #endif

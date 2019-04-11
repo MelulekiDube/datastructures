@@ -116,3 +116,35 @@ void quick_sort(DATA *arr, int low, int hi, DATA_COMPARE cmp){
 		quick_sort(arr, pi+1, hi, cmp);
 	}
 }
+
+/*
+------------------------------------------------
+	searching algorithm
+------------------------------------------------
+*/
+/**
+	@brief Method to perform binary search in a sorted array arr
+	@param arr: The array that we are searching through
+	@param item: The item that we are looking for.
+	@param size: The size of the array
+	@param comp: The comparator for this DATA ITEM
+	@return the index for the item we are searching for or -1 if the item is not in the list
+*/
+int binary_search(DATA *arr, int size, DATA item, DATA_COMPARE comp){
+	int low, mid, hi, cond;
+	low = 0;
+	hi = size-1;
+	mid = (low+hi)/2;
+	cond = comp(item, arr[mid]);
+	while(low<=hi && cond){
+		if(cond<0)
+			hi =  mid-1;//exclude the mid item as we have seen it already
+		else
+			low = mid+1;//exclude the mid item
+		mid = (low+hi)/2;
+		cond = comp(item, arr[mid]);
+	}
+	if(low<=hi)
+		return mid;
+	return -1;
+}

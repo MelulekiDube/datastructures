@@ -39,7 +39,6 @@ void merge(DATA *arr, int l, int m, int r, DATA_COMPARE cmp){
 	size = (r-l)+1;
 	index = 0;
 	DATA temp[size];
-	printf("l is %d m is %d r is %d\n", l, m, r);
 	while(left_index<= m && right_index <= r){
 		int cond = cmp(arr[left_index], arr[right_index]);
 		if(cond <= 0)
@@ -64,5 +63,56 @@ void arrcpy(DATA *arr, DATA *temp, int size){
 		*arr++ = *temp++;
 		//printf("arr now %d \n", arr->data_int);
 		//arr;
+	}
+}
+/*
+-----------------------------------------------
+	quick sort algorithm
+-----------------------------------------------
+*/
+/*
+	@brief: Method to do the partition for the quick sort algorithm
+	@param arr: the array that we are sorting
+	@param low: where we start sorting
+	@param hi: we we stop sorting
+*/
+int partition(DATA *arr, int low, int hi, DATA_COMPARE cmp){
+	
+	DATA pivot = arr[hi]; //set the value of the pivot
+	int i = low-1; //index the smallest element
+	for(int j=low+1; j <= hi; ++j){
+		
+		int cond = cmp(arr[j], pivot);//check if item j is smaller than the pivot
+		if(cond<=0){
+			swap_data(&arr[++i], &arr[j]);//swap item j with the element next to the smallest item
+		}
+	}
+	swap_data(&arr[i], &arr[low]); //place j on the right track
+	return ++i; //return the index of the pivot
+}
+
+/*
+	@brief: Method to swap two data items from an array
+	@param arr: array containing the items that we want to swap
+	@param index_d1: index of the first data items we are swapping
+	@param index_d2: index of the second data item we are swapping
+*/
+void swap_data(DATA* d1, DATA* d2){
+	DATA temp = *d1;
+	*d1 = *d2;
+	*d2 =  temp;
+}
+
+/*
+	@brief: The quick sort function
+	@param arr: the array that we are sorting
+	@param low: where we start sorting
+	@param hi: we we stop sorting
+*/
+void quick_sort(DATA *arr, int low, int hi, DATA_COMPARE cmp){
+	if(hi > low){
+		int pi = partition(arr, low, hi, cmp);
+		quick_sort(arr, low, pi-1,cmp);
+		quick_sort(arr, pi+1, hi, cmp);
 	}
 }

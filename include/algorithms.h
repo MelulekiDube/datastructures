@@ -26,7 +26,6 @@ void merge_sort(DATA *arr, int l, int r, DATA_COMPARE cmp);
 	@param cmp: The comparator for the data item that we wiwll be sorting.
 */
 void merge(DATA *arr, int l, int m, int r, DATA_COMPARE cmp);
-
 /*
 	@brief: Method to copy one array from the other array
 	@param arr: the array that we are copying from
@@ -34,4 +33,30 @@ void merge(DATA *arr, int l, int m, int r, DATA_COMPARE cmp);
 	@param size: the number of items we are copying.
 */
 void arrcpy(DATA *arr, DATA *temp, int size);
+/*
+-----------------------------------------------
+	quick sort algorithm
+-----------------------------------------------
+*/
+/*
+	@brief: Method to do the partition for the quick sort algorithm
+	@param arr: the array that we are sorting
+	@param low: where we start sorting
+	@param hi: we we stop sorting
+*/
+int partition(DATA *arr, int low, int hi, DATA_COMPARE cmp);
+/*
+	@brief: The quick sort function
+	@param arr: the array that we are sorting
+	@param low: where we start sorting
+	@param hi: we we stop sorting
+*/
+void quick_sort(DATA *arr, int low, int hi, DATA_COMPARE cmp);
+
+/*
+	@brief: Method to swap two data items from an array
+	@param d1: pointer to the first data items we are swapping
+	@param d2: pointer to the second data item we are swapping
+*/
+void swap_data(DATA* d1, DATA* d2);
 #endif

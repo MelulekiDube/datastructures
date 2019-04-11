@@ -78,17 +78,17 @@ void arrcpy(DATA *arr, DATA *temp, int size){
 */
 int partition(DATA *arr, int low, int hi, DATA_COMPARE cmp){
 	
-	DATA pivot = arr[low]; //set the value of the pivot
+	DATA pivot = arr[hi]; //set the value of the pivot
 	int i = low-1; //index the smallest element
-	for(int j=low+1; j <= hi; ++j){
+	for(int j=low; j < hi; ++j){
 		
 		int cond = cmp(arr[j], pivot);//check if item j is smaller than the pivot
 		if(cond<=0){
 			swap_data(&arr[++i], &arr[j]);//swap item j with the element next to the smallest item
 		}
 	}
-	swap_data(&arr[i], &arr[low]); //place j on the right track
-	return ++i; //return the index of the pivot
+	swap_data(&arr[++i], &arr[hi]); //place j on the right track
+	return i; //return the index of the pivot
 }
 
 /*

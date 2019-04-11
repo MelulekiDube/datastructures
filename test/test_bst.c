@@ -103,7 +103,7 @@ void test_bst_height(){
 }
 
 void print_data(DATA d){
-	printf("%d, ", d.data_int);
+	printf("%lld, ", d.data_int);
 }
 
 void print_traversals(){

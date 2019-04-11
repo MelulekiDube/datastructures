@@ -78,7 +78,7 @@ void arrcpy(DATA *arr, DATA *temp, int size){
 */
 int partition(DATA *arr, int low, int hi, DATA_COMPARE cmp){
 	
-	DATA pivot = arr[hi]; //set the value of the pivot
+	DATA pivot = arr[low]; //set the value of the pivot
 	int i = low-1; //index the smallest element
 	for(int j=low+1; j <= hi; ++j){
 		
